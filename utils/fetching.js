@@ -1,4 +1,4 @@
-export default async function fetching(){
+export default async function fetching() {
   initMsgShow();
 
   const { synopsisData } = data;
@@ -21,7 +21,7 @@ export default async function fetching(){
 
   typeTextByWord(movieTitle, outputTitle); // Update output title
 
-    typeTextByWord(synopsis, outputText); // Update output text
+  typeTextByWord(synopsis, outputText); // Update output text
 
-    resetLoading(loadingImg,bulkInlineDisplay,setupTextarea, sendBtn);
+  resetLoading(loadingImg, bulkInlineDisplay, setupTextarea, sendBtn);
 }

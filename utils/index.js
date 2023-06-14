@@ -5,19 +5,13 @@ import bulkEnableElem from "./bulkEnableElem";
 import bulkInlineDisplay from "./bulkInlineDisplay";
 import fetchBotReply from "./fetchBotReply";
 import fetching from "./fetching";
-import generatePromptString from "./generatePromptString";
+import fewShotPromptGen from "./fewShotPromptGen";
 import initMsgShow from "./initMsgShow";
 import loadingState from "./loadingState";
 import onloadSelectInput from "./onloadSelectInput";
 import resetLoading from "./resetLoading";
 import toggleButton from "./toggleButton";
-import {
-  isText,
-  isInputElement,
-  isTextAreaElement,
-  isButtonElement,
-  isHtmlElement,
-} from "./isCheck";
+
 
 export {
   typeTextByWord,
@@ -27,15 +21,10 @@ export {
   bulkInlineDisplay,
   fetchBotReply,
   fetching,
-  generatePromptString,
+  fewShotPromptGen,
   initMsgShow,
   loadingState,
   onloadSelectInput,
   resetLoading,
   toggleButton,
-  isText,
-  isInputElement,
-  isTextAreaElement,
-  isButtonElement,
-  isHtmlElement,
 };

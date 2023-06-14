@@ -1,4 +1,4 @@
-import { isText, isHtmlElement } from "./isCheck";
+import { isString, isHtmlElement, isEmptyString } from "./isCheck";
 
 /**
  * Types the given text word by word into the specified HTML element.
@@ -7,9 +7,9 @@ import { isText, isHtmlElement } from "./isCheck";
  * @param {number} speed - The typing speed in milliseconds (optional, default: 100).
  */
 export default function typeTextByWord(text = "", element, speed = 100) {
-  // Check if the text parameter is a string
-  if (!isText(text)) {
-    console.error("Invalid input: text must be a string.");
+  // Check if the text parameter is a non-empty string
+  if (!isString(text) || isEmptyString(text)) {
+    console.error("Invalid input: text must be a non-empty string.");
     return;
   }
 

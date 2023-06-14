@@ -4,7 +4,7 @@ import {
   typeTextByWord,
   fetchBotReply,
   fetching,
-  generatePromptString,
+  fewShotPromptGen,
   initMsgShow,
   loadingState,
   onloadSelectInput,
