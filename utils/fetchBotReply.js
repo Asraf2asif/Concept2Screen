@@ -1,20 +1,60 @@
-// Function to fetch bot reply
-export default async function fetchBotReply({
-  dataArray = [],
-  resType = "",
-  outline = "",
+import {
+  validateArrayParameter,
+  validateStringParameter,
+  validateHtmlElementParameter,
+  validateNumberParameter,
+  handleError,
+} from "./handleError";
+
+import { fewShotPromptGen } from "./fewShotPromptGen";
+import { openai } from "../openaiConfig";
+
+/**
+ * Fetches the bot reply based on the provided parameters.
+ * @param {object} options - The options object containing the parameters for fetching the bot reply.
+ * @param {Array} options.dataArray - The data array parameter.
+ * @param {string} options.resType - The resType parameter.
+ * @param {string} options.outline - The outline parameter.
+ * @param {string} options.prompt - The prompt parameter.
+ * @param {number} options.max_tokens - The max_tokens parameter.
+ * @param {HTMLElement} options.outputTextElement - The HTML element for displaying the bot reply.
+ * @param {HTMLElement} options.outputContainerElement - The HTML element for displaying the error message.
+ * @returns {string} The bot's response text.
+ */
+export async function fetchBotReply({
+  dataArray = null,
+  resType = null,
+  outline = null,
   prompt = null,
   max_tokens = 100,
-  outputTextElement,
+  outputTextElement = null,
   outputContainerElement = null,
 }) {
-  // Send request to API
   try {
+    console.log({
+      dataArray,
+      resType,
+      outline,
+      prompt,
+      max_tokens,
+      outputTextElement,
+      outputContainerElement,
+    });
+    // Validate the input parameters
+    validateParameters(
+      dataArray,
+      resType,
+      outline,
+      prompt,
+      max_tokens,
+      outputTextElement,
+      outputContainerElement
+    );
+
+    // Send request to API
     const response = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: prompt
-        ? prompt
-        : generatePromptString(dataArray, resType, outline), // Construct the prompt string
+      prompt: prompt ? prompt : fewShotPromptGen(dataArray, resType, outline), // Construct the prompt string
       temperature: 1,
       max_tokens: max_tokens,
       top_p: 1,
@@ -27,13 +67,45 @@ export default async function fetchBotReply({
 
     return respondedText;
   } catch (error) {
-    if (outputContainerElement) {
-      outputContainerElement.style.display = "block";
-    }
-    typeTextByWord(
-      "An error occurred while fetching the bot reply.",
-      outputTextElement
+    // Handle errors
+    handleError(
+      error,
+      outputContainerElement,
+      outputTextElement,
+      "An error occurred while fetching the bot reply."
     );
-    console.error(error); // Log any errors to the console
   }
+}
+
+/**
+ * Validates the input parameters.
+ * @param {Array} dataArray - The data array parameter.
+ * @param {string} resType - The resType parameter.
+ * @param {string} outline - The outline parameter.
+ * @param {string} prompt - The prompt parameter.
+ * @param {number} max_tokens - The max_tokens parameter.
+ * @param {HTMLElement} outputTextElement - The HTML element for displaying the error text.
+ * @param {HTMLElement} outputContainerElement - The HTML element for displaying the error message.
+ * @throws {Error} If any of the input parameters are invalid.
+ */
+function validateParameters(
+  dataArray,
+  resType,
+  outline,
+  prompt,
+  max_tokens,
+  outputTextElement,
+  outputContainerElement
+) {
+  validateArrayParameter(dataArray, "data array", false);
+  validateStringParameter(resType, "res type", false);
+  validateStringParameter(outline, "outline", false);
+  validateStringParameter(prompt, "prompt", false);
+  validateHtmlElementParameter(outputTextElement, "output text element", false);
+  validateHtmlElementParameter(
+    outputContainerElement,
+    "output container element",
+    false
+  );
+  validateNumberParameter(max_tokens, "max tokens");
 }

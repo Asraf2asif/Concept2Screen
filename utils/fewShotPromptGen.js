@@ -1,4 +1,8 @@
-import { isArray, isEmptyArray, isString, isEmptyString } from "./isCheck";
+import {
+  validateStringParameter,
+  validateArrayParameter,
+  handleError,
+} from "./handleError";
 
 /**
  * Generates the prompt string for few-shot learning.
@@ -7,48 +11,56 @@ import { isArray, isEmptyArray, isString, isEmptyString } from "./isCheck";
  * @param {string} outline - The outline string to include in the prompt.
  * @returns {string} - The generated prompt string.
  */
-export default function fewShotPromptGen(dataArray, resType, outline) {
+export function fewShotPromptGen(dataArray, resType, outline) {
+  try {
+    // Check if the command property exists in the first data sample
+    if (!dataArray[0].command) {
+      throw new Error(`Not found command property in dataArray.`);
+    }
+    
+    // Validate the input parameters
+    validateParameters(dataArray, resType, outline);
 
-  // Check if the dataArray parameter is an array and not empty
-  if (!isArray(dataArray) || isEmptyArray(dataArray)) {
-    console.error("Invalid input: dataArray must be a non-empty array.");
-    return;
-  }
+    let promptStr = `${dataArray[0].command}\n`;
 
-  // Check if the resType parameter is a non-empty string
-  if (!isString(resType) || isEmptyString(resType)) {
-    console.error("Invalid input: resType must be a non-empty string.");
-    return;
-  }
+    for (let i = 1; i < dataArray.length; i++) {
+      const outlineSample = dataArray[i]["outline"];
 
-  // Check if the outline parameter is a non-empty string
-  if (!isString(outline) || isEmptyString(outline)) {
-    console.error("Invalid input: outline must be a non-empty string.");
-    return;
-  }
-  
-  // Check if the command property exists in the first data sample
-  if (!dataArray[0].command) {
-    console.error("Not found command property in dataArray.");
-    return;
-  }
+      // Check if the resType property exists in the current data sample
+      if (!dataArray[i][resType]) {
+        throw new Error(`Not found ${resType} property in dataArray[${i}].`);
+      }
 
-  let promptStr = `${dataArray[0].command}\n`;
-
-  for (let i = 1; i < dataArray.length; i++) {
-    const outlineSample = dataArray[i]["outline"];
-
-    // Check if the resType property exists in the current data sample
-    if (!dataArray[i][resType]) {
-      console.error(`Not found ${resType} property in dataArray[${i}].`);
-      return;
+      const resTypeSample = dataArray[i][resType];
+      promptStr += `###\noutline: ${outlineSample}\n${resType}: ${resTypeSample}\n`;
     }
 
-    const resTypeSample = dataArray[i][resType];
-    promptStr += `###\noutline: ${outlineSample}\n${resType}: ${resTypeSample}\n`;
+    promptStr += `###\noutline: ${outline}\n${resType}: `;
+
+    return promptStr;
+  } catch (error) {
+    // Handle errors
+    handleError(
+      error,
+      null,
+      null,
+      "An error occurred while generating the prompt string."
+    );
   }
+}
 
-  promptStr += `###\noutline: ${outline}\n${resType}: `;
-
-  return promptStr;
+/**
+ * Validates the input parameters.
+ * @param {Array} dataArray - The array of data samples.
+ * @param {string} resType - The response type to include in the prompt.
+ * @param {string} outline - The outline string to include in the prompt.
+ * @throws {Error} If any of the input parameters are invalid.
+ */
+function validateParameters(dataArray, resType, outline) {
+  // Check if the dataArray parameter is a valid array
+  validateArrayParameter(dataArray, "dataArray");
+  // Check if the resType parameter is a non-empty string
+  validateStringParameter(resType, "resType");
+  // Check if the outline parameter is a non-empty string
+  validateStringParameter(outline, "outline");
 }

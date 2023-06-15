@@ -3,8 +3,10 @@
  * @param {any} value - The value to check.
  * @returns {boolean} Returns true if the value is a text, false otherwise.
  */
-export function isString(value) {
-  return !isNone(value) && (typeof value === 'string' || value instanceof String);
+export function isText(value) {
+  return (
+    !isNone(value) && (typeof value === "string" || value instanceof String)
+  );
 }
 
 /**
@@ -13,7 +15,12 @@ export function isString(value) {
  * @returns {boolean} Returns true if the element is an input element, false otherwise.
  */
 export function isInputElement(element) {
-  return !isNone(element) && (isHtmlElement(element) && element.tagName.toLowerCase() === 'input');
+  return (
+    !isNone(element) &&
+    isHtmlElement(element) &&
+    element.tagName.toLowerCase() === "input" &&
+    element instanceof HTMLInputElement
+  );
 }
 
 /**
@@ -22,7 +29,12 @@ export function isInputElement(element) {
  * @returns {boolean} Returns true if the element is a textarea element, false otherwise.
  */
 export function isTextAreaElement(element) {
-  return !isNone(element) && (isHtmlElement(element) && element.tagName.toLowerCase() === 'textarea');
+  return (
+    !isNone(element) &&
+    isHtmlElement(element) &&
+    element.tagName.toLowerCase() === "textarea" &&
+    element instanceof HTMLTextAreaElement
+  );
 }
 
 /**
@@ -31,7 +43,12 @@ export function isTextAreaElement(element) {
  * @returns {boolean} Returns true if the element is an img element, false otherwise.
  */
 export function isImg(element) {
-  return !isNone(element) && (isHtmlElement(element) && element.tagName.toLowerCase() === 'img');
+  return (
+    !isNone(element) &&
+    isHtmlElement(element) &&
+    element.tagName.toLowerCase() === "img" &&
+    element instanceof HTMLImageElement
+  );
 }
 
 /**
@@ -40,9 +57,15 @@ export function isImg(element) {
  * @returns {boolean} Returns true if the element is a button element, false otherwise.
  */
 export function isButtonElement(element) {
-  return isHtmlElement(element) && (
-    element.tagName.toLowerCase() === 'button' || 
-    (element.tagName.toLowerCase() === 'input' && element.type.toLowerCase() === 'button'));
+  return (
+    !isNone(element) &&
+    isHtmlElement(element) &&
+    ((element.tagName.toLowerCase() === "button" &&
+      element instanceof HTMLButtonElement) ||
+      (element.tagName.toLowerCase() === "input" &&
+        element instanceof HTMLInputElement &&
+        element.type.toLowerCase() === "button"))
+  );
 }
 
 /**
@@ -60,7 +83,7 @@ export function isHtmlElement(element) {
  * @returns {boolean} Returns true if the value is a number, false otherwise.
  */
 export function isNumber(value) {
-  return !isNone(value) && (!isNaN(value) || typeof value === 'number');
+  return !isNone(value) && (!isNaN(value) || typeof value === "number");
 }
 
 /**
@@ -74,13 +97,13 @@ export function isArray(value) {
     return false;
   }
 
- // Use the Array.isArray method if available (compatible with modern browsers)
+  // Use the Array.isArray method if available (compatible with modern browsers)
   if (Array.isArray) {
     return Array.isArray(value);
   }
 
   // Fallback for older browsers that don't support Array.isArray
-  return Object.prototype.toString.call(value) === '[object Array]';
+  return Object.prototype.toString.call(value) === "[object Array]";
 }
 
 /**
@@ -89,7 +112,9 @@ export function isArray(value) {
  * @returns {boolean} Returns true if the value is an object, false otherwise.
  */
 export function isObject(value) {
-  return !isNone(value) && (typeof value === 'object' || value instanceof Object);
+  return (
+    !isNone(value) && (typeof value === "object" || value instanceof Object)
+  );
 }
 
 /**
@@ -142,6 +167,8 @@ export function isEmptyNumber(value) {
  * @param {string} str - The value to check.
  * @returns {boolean} Returns true if the value is a valid date string, false otherwise.
  */
-export const isDateStr = (str) => {
-  return isString(str) && new Date(str) !== 'Invalid Date' && !isNaN(new Date(str));
-};
+export function isDateStr(str) {
+  return (
+    isText(str) && new Date(str) !== "Invalid Date" && !isNaN(new Date(str))
+  );
+}

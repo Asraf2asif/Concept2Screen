@@ -1,39 +1,19 @@
-import bulkHideDisplay from "./bulkHideDisplay";
-import bulkDisableElem from "./bulkDisableElem";
+import { bulkHideDisplay } from "./bulkHideDisplay";
+import { bulkDisableElem } from "./bulkDisableElem";
+
+const loadingImg = document.getElementById("loading"); // Loading image
+const setupTextarea = document.getElementById("setup-textarea"); // Textarea input
+const sendBtn = document.getElementById("send-btn"); // Send button
 
 /**
- * Shows the loading state by displaying the loading image and disabling the input and button elements.
- * @param {HTMLImageElement} loadingImg - The loading image element.
- * @param {HTMLInputElement|HTMLTextAreaElement} input - The input or textarea element.
- * @param {HTMLButtonElement} btn - The button element.
+ * Resets the loading state by hiding the loading image and enabling the input and button elements.
  */
-export default function loadingState(loadingImg, input, btn) {
-  // Check if the loadingImg parameter is an <img> element
-  if (!isImg(loadingImg)) {
-    console.error("Invalid loadingImg: loadingImg must be an <img> element.");
-    return;
-  }
-
-  // Check if the input is an input or textarea element
-  if (!isInputElement(input) && !isTextAreaElement(input)) {
-    console.error(
-      "Invalid input: input must be an input, textarea, or button element."
-    );
-    return;
-  }
-
-  // Check if the btn is a button element
-  if (!isButtonElement(btn)) {
-    console.error("Invalid btn: btn must be a button element.");
-    return;
-  }
-
+export function loadingState() {
   // Show the loading image
   loadingImg.style.display = "inline";
-
   // Hide the input and button elements
-  bulkHideDisplay(input, btn);
+  bulkHideDisplay(setupTextarea, sendBtn);
 
   // Disable the input and button elements
-  bulkDisableElem(input, btn);
+  bulkDisableElem(setupTextarea, sendBtn);
 }

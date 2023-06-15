@@ -106,7 +106,7 @@ section {
 .speech-bubble-ai {
     max-width: 55%;
     min-width: 200px;
-    min-height: 124px;
+    min-height: 120px;
     border-radius: var(--border-rad-lg);
     position: relative;
     margin: 0;
@@ -114,7 +114,7 @@ section {
     background-color: var(--white);
     align-self: flex-start;
     display: flex;
-    align-items: center;
+/*    align-items: center;*/
 }
 
 .speech-bubble-ai:before {
