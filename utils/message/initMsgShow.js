@@ -5,7 +5,9 @@ import { typeTextByChar } from "../ui/typeTextByChar";
 // Get the necessary DOM elements
 const movieBossText = document.getElementById("movie-boss-text"); // Output text container
 
-const defaultMsg = "Give me a one-sentence concept and I'll give you an eye-catching title, a synopsis the studios will love, a movie poster... AND choose the cast!";
+const defaultMsg =
+  "Transform Your Ideas into Blockbusters with a Single Movie Concept." +
+  " Get a Movie Title, Synopsis, Poster, and Cast, All Powered by AI!";
 
 export function initMsgShow() {
   loadingState();
