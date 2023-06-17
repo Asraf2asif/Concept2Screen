@@ -27,3 +27,8 @@ setupTextarea.addEventListener("keydown", handleTextareaKeydown);
 
 // Add event listener for send button click
 sendBtn.addEventListener("click", handleSendBtnClick);
+
+// Add dynamic copyright year
+const currentYear = new Date().getFullYear();
+document.getElementById("currentYear").textContent = currentYear;
+
