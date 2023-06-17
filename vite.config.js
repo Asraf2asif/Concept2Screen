@@ -1,5 +1,5 @@
-import {defineConfig} from 'vite';
-
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy';
 import postcssImport from 'postcss-import';
 import postcssUnroot from 'postcss-unroot';
 import postcssColorRgb from 'postcss-color-rgb';
@@ -15,12 +15,19 @@ import postcsscolorRgbaFallback from 'postcss-color-rgba-fallback';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
+
 export default defineConfig({
+  plugins: [
+    legacy({
+      targets: ['cover 99.5%'],
+    }),
+  ],
+
   css: {
     postcss: {
       plugins: [
         postcssImport(),
-        postcssUnroot({ method: "copy" }),
+        postcssUnroot({ method: 'copy' }),
         postcssColorRgb(),
         postcssPseudoelements(),
         postcssFlexbugsFixes(),
@@ -31,7 +38,7 @@ export default defineConfig({
         postcssMediaMinmax(),
         postcssUtilities({ ie8: true }),
         postcsscolorRgbaFallback({ oldie: true }),
-        autoprefixer(),
+        autoprefixer({ overrideBrowserslist:'cover 99.5%' }),
         cssnano({ preset: 'default' }),
       ],
     },
