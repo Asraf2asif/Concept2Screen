@@ -1,19 +1,20 @@
-import { typeTextByChar } from "./typeTextByChar";
-import { bulkHideDisplay } from "./bulkHideDisplay";
-import { bulkDisableElem } from "./bulkDisableElem";
-import { bulkEnableElem } from "./bulkEnableElem";
-import { bulkInlineDisplay } from "./bulkInlineDisplay";
-import { fetchBotReply } from "./fetchBotReply";
-import { fewShotPromptGen } from "./fewShotPromptGen";
-import { initMsgShow } from "./initMsgShow";
-import { loadingState } from "./loadingState";
-import { onloadSelectInput } from "./onloadSelectInput";
-import { resetLoading } from "./resetLoading";
-import { toggleButton } from "./toggleButton";
-import { synopsisShow } from "./synopsisShow";
-import { waitMsgShow } from "./waitMsgShow";
-import { handleSendBtnClick } from "./handleSendBtnClick";
-import { handleTextareaKeydown } from "./handleTextareaKeydown";
+import { typeTextByChar } from "./ui/typeTextByChar";
+import { bulkHideDisplay } from "./bulk/bulkHideDisplay";
+import { bulkDisableElem } from "./bulk/bulkDisableElem";
+import { bulkEnableElem } from "./bulk/bulkEnableElem";
+import { bulkInlineDisplay } from "./bulk/bulkInlineDisplay";
+import { fetchBotReply } from "./fetch/fetchBotReply";
+import { fewShotPromptGen } from "./fetch/fewShotPromptGen";
+import { initMsgShow } from "./message/initMsgShow";
+import { loadingState } from "./state/loadingState";
+import { onloadSelectInput } from "./ui/onloadSelectInput";
+import { resetLoading } from "./state/resetLoading";
+import { toggleButton } from "./ui/toggleButton";
+import { synopsisShow } from "./message/synopsisShow";
+import { waitMsgShow } from "./message/waitMsgShow";
+import { handleSendBtnClick } from "./interaction/handleSendBtnClick";
+import { handleTextareaKeydown } from "./interaction/handleTextareaKeydown";
+
 
 export {
   typeTextByChar,
