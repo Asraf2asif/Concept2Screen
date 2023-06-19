@@ -21,18 +21,6 @@ body {
   position: relative;                                      /* Set the position to relative */
 }
 
-/* Styles for all heading elements */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Poppins", Arial, sans-serif;               /* Set the font family for h1 elements with fallback options */
-  font-weight: bold;                                       /* Set the font weight to bold for h1 elements */
-}
-
-/* Styles for h1 elements */
-h1 {
-  font-size: 1.8em;                                        /* Set the font size for h1 elements */
-  padding: 20px 0;                                         /* Set the top and bottom padding for h1 elements */
-}
-
 /* Create an overlay element for the page */
 
 .overlay {
