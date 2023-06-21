@@ -5,9 +5,18 @@
   color: var(--dark);                           /* Set the text color using a CSS variable */
   padding: 1em;                                 /* Add padding to the output container */
 
+  background: var(--pink);
+  color: white;
+  border-radius: 5px;
+  margin-left: 30px;
+
   & > img {
     max-width: 100%;                            /* Set the maximum width of the image */
     border-radius: var(--border-rad-lg);        /* Set the border radius using a CSS variable */
     box-shadow: 1px 1px 5px 1px var(--dark);    /* Add box shadow to the image */
+  }
+
+  & > h1 {
+    padding-top: 0;
   }
 }

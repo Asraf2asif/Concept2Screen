@@ -17,4 +17,7 @@ export function resetLoading() {
 
   // Enable the input and button elements
   bulkEnableElem(setupTextarea, sendBtn);
+
+  // Select the input element
+  setupTextarea.select();
 }

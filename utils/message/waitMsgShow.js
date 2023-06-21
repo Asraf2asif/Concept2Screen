@@ -21,4 +21,5 @@ export async function waitMsgShow() {
     outputTextElement: movieBossText,
   });
   typeTextByChar(initMsg, movieBossText); // Update movieBossText
+  console.log(initMsg)
 }

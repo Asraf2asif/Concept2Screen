@@ -31,15 +31,6 @@ export async function fetchBotReply({
   outputContainerElement = null,
 }) {
   try {
-    console.log({
-      dataArray,
-      resType,
-      outline,
-      prompt,
-      max_tokens,
-      outputTextElement,
-      outputContainerElement,
-    });
     // Validate the input parameters
     validateParameters(
       dataArray,
