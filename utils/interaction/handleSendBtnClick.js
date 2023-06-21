@@ -13,7 +13,7 @@ const movieBossText = document.getElementById("movie-boss-text"); // Output text
  */
 export async function handleSendBtnClick() {
   if (setupTextarea.value) {
-    await waitMsgShow(); // Wait for the message to be shown
+    // await waitMsgShow(); // Wait for the message to be shown
     await synopsisShow(); // Display the synopsis
   } else {
     typeTextByChar("Please provide some concept...", movieBossText); // Display a message asking for a concept

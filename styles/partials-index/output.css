@@ -17,6 +17,7 @@
   }
 
   & > h1 {
+    display: none;
     padding-top: 0;
   }
 }
