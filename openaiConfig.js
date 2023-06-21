@@ -8,7 +8,6 @@ const configuration = new Configuration({
   apiKey: apiKey,
 });
 configuration.baseOptions.headers["Authorization"] = `Bearer ${apiKey}`;
-
 // Create and export the OpenAI instance
 export const openai = new OpenAIApi(configuration);
 
